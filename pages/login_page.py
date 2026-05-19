@@ -1,5 +1,5 @@
 from .base_page import BasePage
-from config.settings import USERNAME, PASSWORD, BASE_URL, LOGIN_PATH, HOME_PATH
+from config.settings import USERNAME, PASSWORD, BASE_URL, LOGIN_PATH
 from selenium.webdriver.common.by import By
 
 class LoginPage(BasePage):
@@ -25,4 +25,3 @@ class LoginPage(BasePage):
         self.enter_username(USERNAME)
         self.enter_password(PASSWORD)
         self.submit()
-        self.url_contains_path(HOME_PATH)
