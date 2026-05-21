@@ -49,3 +49,6 @@ class HomePage(BasePage):
     def get_sidebar_search_results(self):
         sidebar_options = self.get_elements(self.SIDEBAR_OPTIONS)
         return [option.text for option in sidebar_options]
+
+    def do_logout(self):
+        self.select_option_from_dropdown(self.USER_DROPDOWN_OPTIONS, "Logout")

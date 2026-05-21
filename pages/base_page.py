@@ -1,6 +1,7 @@
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
+from selenium.common.exceptions import NoSuchElementException
 # import logging
 
 class BasePage:
@@ -60,3 +61,16 @@ class BasePage:
             self.wait.until(EC.visibility_of_element_located(locator))
         except TimeoutException:
             raise AssertionError(f"'{element_name}' is not visible.")
+
+    def select_option_from_dropdown(self, options_list_locator, option_text):
+        try:
+            options_list = self.wait.until(EC.visibility_of_all_elements_located(options_list_locator))
+        except TimeoutException:
+            raise AssertionError(f" Element '{options_list_locator}' is not visible.")
+
+        for option in options_list:
+            if option.text.strip() == option_text:
+                self.click(option)
+                break
+        else:
+            raise NoSuchElementException(f"Dropdown option '{option_text}' not found.")
